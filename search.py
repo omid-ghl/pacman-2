@@ -137,8 +137,8 @@ def depthFirstSearch(problem):
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    util.raiseNotDefined()
-
+    queue = util.Queue()
+    #dar bfs ingone amal mikonim ke be sorat saf jolo miravim(fifo)
 
     return generalGeraphSearch(problem, queue)
 
