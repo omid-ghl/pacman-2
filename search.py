@@ -20,7 +20,12 @@ Pacman agents (in searchAgents.py).
 import util
 
 class SearchProblem:
+    """
+    This class outlines the structure of a search problem, but doesn't implement
+    any of the methods (in object-oriented terminology: an abstract class).
 
+    You do not need to change anything in this class, ever.
+    """
 
     def getStartState(self):
         """
@@ -67,6 +72,49 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+
+def generalGeraphSearch(problem,structure):
+
+    structure.push([(problem.getStartState(),"stop",0)])
+    # start state
+
+    visited = []
+
+    if structure.isEmpty():
+        return false
+    #baraye inke agar list khali mand javabi ndshte bashim
+
+    while not structure.isEmpty():
+
+        path =structure.pop()
+        #moshakhas mikonad ke az kodam masir byd harekat konim
+
+        cu_s = path[-1][0]
+        #path yek araye 2 bodi ast k ma dar bode awal akhrin onsor ra ba -1 va dar bode dowom awalin onsor az  akharin onsore bode 1 ra farakhani mikonim
+
+        if problem.isGoalState(cu_s):
+
+            li = [x[1] for x in path[1:]]
+            return li
+
+        if cu_s not in visited:
+
+            visited.append(cu_s)
+            #agar an state ke daresh qarar drim(cu_s)dar visited nabashad byd an ra ezafe konim
+
+            for successor in problem.getSuccessors(cu_s):
+
+                if successor[0] not in visited:
+
+                    successorPath = path[:]
+
+                    successorPath.append(successor)
+
+                    structure.push(successorPath)
+                    #byd farzand an ra be listy ke doros krdim (structure)ezafe konim
+
+
+
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -81,18 +129,23 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE1***"
-    util.raiseNotDefined()
+    stack = util.Stack()
+    #dar dfs ma be sorate poshte amal mikonim
+
+    return generalGeraphSearch(problem, stack)
+    
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
+
+    return generalGeraphSearch(problem, queue)
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
 
 def nullHeuristic(state, problem=None):
     """
