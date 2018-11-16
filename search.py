@@ -145,7 +145,7 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
   
-    cost = lambdapath: problem.getCostOfActions([x[1] for x in path[1:]])
+    cost = lambda path: problem.getCostOfActions([x[1] for x in path[1:]])
     #cost ya haman hazineii ke algoritm baraye ma az ebteda ta inja dashte ra braye ma moshakhas mikonad
 
     priorityqueue =util.PriorityQueueWithFunction(cost)
@@ -166,8 +166,11 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
     cost = lambda path: problem.getCostOfActions([x[1] for x in path[1:]]) +  heuristic(path[-1][0],problem)
+    #hazine dar inja barabar ba haman cost ucs ast ke byd ba hazine tabe heuristiceman jam konim
 
     pq = util.PriorityQueueWithFunction(cost)
+    #yek safe olaviat ke az f(x) estefade mikonad
+
 
     return generalGeraphSearch(problem , pq)
 
