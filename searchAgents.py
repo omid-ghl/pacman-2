@@ -524,6 +524,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
 
         
         foodL = self.food.asList()
+
        
         if state in foodL:
             return True
